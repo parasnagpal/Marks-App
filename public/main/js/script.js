@@ -18,7 +18,7 @@ $(()=>{
                          name:$('#course_name').val()
                      })
                      
-                     addcourse($('#course_name').val())
+                     addcourse($('#course_name').val(),true)
                    }
                })
         )
@@ -30,6 +30,7 @@ $(()=>{
 
     function addcourse(course_name,force)
     {
+        let addcourse=false
        if(!courses[course_name] || force)
         {
            if(!force)
@@ -96,6 +97,7 @@ $(()=>{
 
        function appendlist(id,val)
        {
+           console.log("Appending")
          $(`#_${id} ul`)
            .append(`<li>${val}</li>`)
        }
@@ -105,7 +107,12 @@ $(()=>{
        {
            for(let val of courses[keys])
            {
-               $(`#${keys}`).append(`<li>${val}</li>`)
+           console.log("Appeng")
+
+               $(`#${keys}`)
+               .html('')
+               .append(`<li>${val}</li>`)
+              
            }
        }
        
