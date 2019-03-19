@@ -85,6 +85,8 @@ $(()=>{
                       .attr('class','btn btn-dark m-2')
                       .click(()=>{
                           ViewCourse(item)
+                          $('#new_course').attr('style','float:unset !important;display:block;')
+                                          
                       })
                 )
              )
@@ -145,7 +147,7 @@ $(()=>{
        //Dom change
        $('#new_course').html('')
                .append(
-                     $('<table>')
+                     $('<table class="table">')
                           .attr('id','table')
                )
         $('.cards').html('')       
@@ -158,10 +160,10 @@ $(()=>{
         let rowcount=0
         function tableAppend(){
             $('#table')
-                  .append('<tr id="tr1"><th>Roll Number</th><th>Name</th></tr>')
+                  .append('<tr id="tr1"><th scope="col">Roll Number</th><th scope="col">Name</th></tr>')
             for(let subs of courses[course])
             
-               $('#tr1').append(`<th>${subs}</th>`)
+               $('#tr1').append(`<th scope="col">${subs}</th>`)
                   
         }
         tableAppend()
@@ -169,6 +171,7 @@ $(()=>{
         $('body').append(
             $('<button>')
                 .text('Add data')
+                .attr('class','btn btn-dark m-2')
                 .click(()=>{
                     $.post('/main/createtable',{
                         course
@@ -179,7 +182,7 @@ $(()=>{
                          for(let subs of courses[course])
                                     $(`#tr_${rowcount-1}`).append(`<th><input id='sub_${subs}'></th>`)
                          $('body').append(
-                                $('<button class="push">')
+                                $(`<button class="push btn btn-dark m-2">`)
                                     .text('Push')
                                     .click(()=>{
                                         {
@@ -189,7 +192,8 @@ $(()=>{
                                               let name=$('#name').val()
                                               let sub={}
                                             for(let subs of courses[course])
-                                                sub[course]=$(`#sub_${subs}`).val()   
+                                                sub[subs]=$(`#sub_${subs}`).val()  
+                                            console.log(sub)     
                                             $(`#tr_${rowcount-1}`).html('')    
                                                                   .append(
                                                                       $('<td>').text(`${roll}`)
@@ -198,7 +202,7 @@ $(()=>{
                                                                       $(`<td>`).text(`${name}`)
                                                                   )
                                             for(let subs of courses[course])
-                                              $(`#tr_${rowcount-1}`).append(`<td>${sub[course]}</td>`)
+                                              $(`#tr_${rowcount-1}`).append(`<td>${sub[subs]}</td>`)
                                              $('.push').hide() 
                                             
                                         }

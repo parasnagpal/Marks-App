@@ -52,8 +52,9 @@ function addrow(obj)
    async function dbops(){
        await subject.sync()
        let table=await subject.create(obj)
-   }
-   dbops()
+    dbops()
+}
+
 }
 
 /**                     ********************                */
