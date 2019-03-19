@@ -123,7 +123,7 @@ app.post('/table',(req,res)=>{
 
 
 app.use(express.static(path.join(__dirname,"/public")))
-app.listen(4000,()=>{
+app.listen(process.env.PORT||4000,()=>{
     console.log("Server Started at http://localhost:4000/")
 })
 
