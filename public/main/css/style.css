@@ -1,0 +1,32 @@
+/*Body-background*/
+body{
+    background-image: url('./back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+/*Body-background*/
+
+/*Button-AddCourse*/
+#new_course{
+    float: right;
+    display: inline-block;
+}
+#add_course,button{
+    border-radius: 1.25rem !important;
+}
+/*Button-AddCourse*/
+
+/*Alterations*/
+.badge{
+    font-size: unset;
+}
+.card{
+    background-color: unset;
+    width: 18rem;
+    flex:unset;
+}
+.cards{
+    width: unset !important;
+}
+/*Alterations*/
