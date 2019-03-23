@@ -1,8 +1,12 @@
 const express=require("express")
-const sequelize=require("sequelize")
+const sequelize=require('sequelize')
 const path=require('path')
 const fs=require('fs')
 const app=express()
+
+
+const newtable=require('./mysql_ops/newtable')
+const apptable=require('./mysql_ops/appendtable')
 
 /**     *************************         ***************    */
 
@@ -20,47 +24,8 @@ let course_location=path.join(__dirname,'/data/subjects.json')
 
 /** *************** ***************** ****************  */
 
-/**                     ********************                */
-
-const db= new sequelize({
-    dialect:'mysql',
-    database:'sample',
-    username:'root',
-    password:'alkanagpal'
-})
-
-
-let subject
+//let subject
 let query
-
-
-function createtable(course)
-{
- 
- let obj={}
- obj['RollNo']=sequelize.INTEGER
- obj['Name']=sequelize.STRING
-  for(let subjects of courses[course])
-   {
-     obj[subjects]= sequelize.STRING
-   }
-  subject=db.define('course',obj)
-}
-
-function addrow(obj)
-{
-   async function dbops(){
-       await subject.sync()
-       let table=await subject.create(obj)
-    dbops()
-}
-
-}
-
-/**                     ********************                */
-
-
-
 
 app.use(express.urlencoded({
     extended:true
@@ -85,9 +50,11 @@ app.get('/main/courses',(req,res)=>{
 })
 
 app.get('/table',(req,res)=>{
-    db.query(`SELECT * FROM ${query}`,{type:sequelize.QueryTypes.SELECT})
-            .then(data=>{console.log(data)})
-    res.send({})        
+
+     newtable.db.query(`SELECT * from ${query}s`,{type:sequelize.QueryTypes.SELECT})
+            .then(data=>{console.log(data)
+               res.send(data)
+             })
 })
 
 }
@@ -97,25 +64,38 @@ app.get('/table',(req,res)=>{
 //Post requests
 {
 app.post('/main/new',(req,res)=>{
+
     if(!courses[req.body.name])
     {
       courses[req.body.name]=[]
       updatesub()
     }
       console.log(courses)  
+    
+      newtable.newtable(req.body.name)
 })
+
+
 app.post('/main/courses',(req,res)=>{
     courses=req.body.courses;
     updatesub()
 })
 
-app.post('/main/createtable',(req,res)=>{
-    course=req.body.course
-    createtable(course)
+app.post('/main/addcol',(req,res)=>{
+    apptable.addcol(req.body.table,req.body.col)
+})
+
+
+
+
+app.post('/main/rowdata',(req,res)=>{
+    console.log(req.body)
+    newtable.newrow(req.body.course,req.body)
 })
 
 app.post('/table',(req,res)=>{
     query=req.body.course
+    subject=query
 })
 
 }
