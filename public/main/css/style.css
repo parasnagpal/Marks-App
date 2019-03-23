@@ -1,6 +1,11 @@
+/**Font Files*/
+
+
+
+
 /*Body-background*/
 body{
-    background-image: url('./back1.jpg');
+   background-image: url('./back4.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -25,7 +30,7 @@ body{
     border-radius: 1.25rem;
 }
 .card{
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(204, 204, 204, 0.5);
     border-radius: 1.25rem !important;
     width: 18rem;
     flex:unset !important;
@@ -35,8 +40,22 @@ body{
     width: unset !important;
     justify-content: center;
 }
+.card-title{
+    font-family: 'Luckiest Guy', cursive;
+    text-align: center;
+}
+
+ul{
+    list-style: none;
+    font-family: 'Lobster', serif;
+    
+}
 
 table{
-    color: white;
+    color: rgb(161, 161, 161);
+}
+
+h1{
+    font-family: 'Baloo Chettan', cursive;
 }
 /*Alterations*/

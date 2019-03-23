@@ -56,6 +56,7 @@ $(()=>{
                   .append(
                     $('<input>')
                        .attr('type','text')
+                       .attr('class','form-control')
                        .hide()
                        .attr('id',`${id}_`)
                   )
@@ -69,6 +70,7 @@ $(()=>{
                                  if(e.keyCode==13 )
                                    {
                                        let val=$(`#_${id} input`).val()
+                                       $(`#_${id} input`).val('').hide()     
                                        $.post('/main/addcol',{
                                                table:item,
                                                col:val
